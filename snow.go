@@ -4,7 +4,6 @@ package snow
 import (
 	"errors"
 	"strconv"
-	"sync"
 	"time"
 )
 
@@ -17,11 +16,10 @@ type Node struct {
 	nodeShift uint8
 	timeFn    func() int64
 
-	mu   sync.Mutex
 	time int64
 	step int64
 
-	//  epoch is snowflake epoch in milliseconds.
+	// epoch is snowflake epoch in milliseconds.
 	epoch    int64
 	nodeMask int64
 }
@@ -79,9 +77,7 @@ func NewNode(optionFns ...OptionFn) (*Node, error) {
 		return nil, err
 	}
 
-	if option.OutC != nil {
-		go n.generating()
-	}
+	go n.generating()
 
 	return n, nil
 }
@@ -91,14 +87,7 @@ func NewNode(optionFns ...OptionFn) (*Node, error) {
 // - Make sure your system is keeping accurate system time
 // - Make sure you never have multiple nodes running with the same node ID
 func (n *Node) Next() ID {
-	if n.option.OutC != nil {
-		return <-n.option.OutC
-	}
-
-	n.mu.Lock()
-	defer n.mu.Unlock()
-
-	return n.next()
+	return <-n.option.OutC
 }
 
 func (n *Node) generating() {

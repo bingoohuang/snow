@@ -46,6 +46,10 @@ func (o *Option) Apply(fns ...OptionFn) {
 	if o.NodeID < 0 {
 		o.NodeID = defaultIPNodeID()
 	}
+
+	if o.OutC == nil {
+		o.OutC = make(chan ID, 1000)
+	}
 }
 
 // OptionFn defines the function prototype to apply options.
