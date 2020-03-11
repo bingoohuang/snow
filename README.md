@@ -144,8 +144,3 @@ snowflake package directory.
 ```sh
 go test -run=^$ -bench=.
 ```
-
-If your curious, check out this commit that shows benchmarks that compare a few
-different ways of implementing a snowflake generator in Go.
-
-* https://github.com/bingoohuang/snow/tree/9befef8908df13f4102ed21f42b083dd862b5036
