@@ -1,6 +1,6 @@
 # snowflake
 
-[![GoDoc](https://godoc.org/github.com/bwmarrin/snowflake?status.svg)](https://godoc.org/github.com/bwmarrin/snowflake) [![Go report](http://goreportcard.com/badge/bwmarrin/snowflake)](http://goreportcard.com/report/bwmarrin/snowflake) [![Coverage](http://gocover.io/_badge/github.com/bwmarrin/snowflake)](https://gocover.io/github.com/bwmarrin/snowflake) [![Build Status](https://travis-ci.org/bwmarrin/snowflake.svg?branch=master)](https://travis-ci.org/bwmarrin/snowflake) [![Discord Gophers](https://img.shields.io/badge/Discord%20Gophers-%23info-blue.svg)](https://discord.gg/0f1SbxBZjYq9jLBk)
+[![GoDoc](https://godoc.org/github.com/bingoohuang/snow?status.svg)](https://godoc.org/github.com/bingoohuang/snow) [![Go report](http://goreportcard.com/badge/bingoohuang/snow)](http://goreportcard.com/report/bingoohuang/snow) [![Coverage](http://gocover.io/_badge/github.com/bingoohuang/snow)](https://gocover.io/github.com/bingoohuang/snow) [![Build Status](https://travis-ci.org/bingoohuang/snow.svg?branch=master)](https://travis-ci.org/bingoohuang/snow) [![Discord Gophers](https://img.shields.io/badge/Discord%20Gophers-%23info-blue.svg)](https://discord.gg/0f1SbxBZjYq9jLBk)
 
 snowflake is a [Go](https://golang.org/) package that provides
 
@@ -71,7 +71,7 @@ This assumes you already have a working Go environment, if not please see
 [this page](https://golang.org/doc/install) first.
 
 ```sh
-go get github.com/bwmarrin/snowflake
+go get github.com/bingoohuang/snow
 ```
 
 ### Usage
@@ -148,4 +148,4 @@ go test -run=^$ -bench=.
 If your curious, check out this commit that shows benchmarks that compare a few
 different ways of implementing a snowflake generator in Go.
 
-* https://github.com/bwmarrin/snowflake/tree/9befef8908df13f4102ed21f42b083dd862b5036
+* https://github.com/bingoohuang/snow/tree/9befef8908df13f4102ed21f42b083dd862b5036
