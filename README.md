@@ -14,6 +14,8 @@ snowflake is a [Go](https://golang.org/) package that provides
 * Methods to convert a snowflake ID into several other data types and back.
 * JSON Marshal/Unmarshal functions to easily use snowflake IDs within a JSON API.
 * Monotonic Clock calculations protect from clock drift.
+* Default nodeID is set to main last part of IPv4 (on en0/eth0 interface), eg. nodeID = 3 when IP is 192.168.1.3
+* Channel output API for more golang style.
 
 **For help with this package or general Go discussion, please join the [Discord Gophers](https://discord.gg/0f1SbxBZjYq9jLBk) chat server.**
 
@@ -27,9 +29,9 @@ future will strongly avoid API changes to existing functions.
 By default, the ID format follows the original Twitter snowflake format.
 
 * The ID as a whole is a 63 bit integer stored in an int64
-* 41 bits are used to store a timestamp with millisecond precision, using a custom epoch.
-* 10 bits are used to store a node id - a range from 0 through 1023.
-* 12 bits are used to store a sequence number - a range from 0 through 4095.
+* 41 bits used to store a timestamp with millisecond precision, using a custom epoch.
+* 10 bits used to store a node id - a range from 0 through 1023.
+* 12 bits used to store a sequence number - a range from 0 through 4095.
 
 ### Custom Format
 
