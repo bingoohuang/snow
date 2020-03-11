@@ -98,7 +98,8 @@ cannot guarantee unique IDs across all nodes.
 #### Use default Snowflake Node
 
 ```go
-// Next return a new generated snowflake ID.
+// Next return a new generated snowflake ID by the Global DefaultSnow
+// with the 10-bits node ID which get the last 8-bits from host IP v4.
 id := snow.Next()
 
 // Print out the ID in a few different ways.
@@ -125,7 +126,6 @@ fmt.Printf("String ID: %s\n", id)
 fmt.Printf("Base2  ID: %s\n", id.Base2())
 fmt.Printf("Base64 ID: %s\n", id.Base64())
 fmt.Printf("ID       : %d\n", node.Next().Int64())
-
 ```
 
 #### Use output channel mode
@@ -138,7 +138,6 @@ snow.NewNode(snow.WithOutChan(out))
 id = <- out
 // Print out the ID in a few different ways.
 fmt.Printf("Int64  ID: %d\n", id)
-}
 ```
 
 ### Performance
