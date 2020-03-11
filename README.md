@@ -93,45 +93,51 @@ Keep in mind that each node you create must have a unique node number, even
 across multiple servers.  If you do not keep node numbers unique the generator
 cannot guarantee unique IDs across all nodes.
 
-**Example Program:**
+### Example Program
+
+#### Use default Snowflake Node
 
 ```go
-package main
+// Next return a new generated snowflake ID.
+id := snow.Next()
 
-import (
-	"fmt"
+// Print out the ID in a few different ways.
+fmt.Printf("Int64  ID: %d\n", id)
+fmt.Printf("String ID: %s\n", id)
+```
 
-	"github.com/bingoohuang/snow"
-)
+#### Use customized Snowflake Node
 
-func main() {
-	// Create a new Node with a Node number of 1
-	node, err := snow.NewNode(snow.WithNodeID(1))
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+```go
+// Create a new Node with a Node number of 1
+node, err := snow.NewNode(snow.WithNodeID(1))
+if err != nil {
+    fmt.Println(err)
+    return
+}
 
-	// Next return a new generated snowflake ID.
-	id := node.Next()
+// Next return a new generated snowflake ID.
+id := node.Next()
 
-	// Print out the ID in a few different ways.
-	fmt.Printf("Int64  ID: %d\n", id)
-	fmt.Printf("String ID: %s\n", id)
-	fmt.Printf("Base2  ID: %s\n", id.Base2())
-	fmt.Printf("Base64 ID: %s\n", id.Base64())
+// Print out the ID in a few different ways.
+fmt.Printf("Int64  ID: %d\n", id)
+fmt.Printf("String ID: %s\n", id)
+fmt.Printf("Base2  ID: %s\n", id.Base2())
+fmt.Printf("Base64 ID: %s\n", id.Base64())
+fmt.Printf("ID       : %d\n", node.Next().Int64())
 
-    // Next and print, all in one.
-    fmt.Printf("ID       : %d\n", node.Next().Int64())
-    
-    // Or use channel to get ID
-    out := make(chan snow.ID)
-    snow.NewNode(snow.WithOutChan(out))
-   
-    // get a new generated snowflake ID.
-    id = <- out
-	// Print out the ID in a few different ways.
-	fmt.Printf("Int64  ID: %d\n", id)
+```
+
+#### Use output channel mode
+
+```go
+out := make(chan snow.ID)
+snow.NewNode(snow.WithOutChan(out))
+
+// get a new generated snowflake ID.
+id = <- out
+// Print out the ID in a few different ways.
+fmt.Printf("Int64  ID: %d\n", id)
 }
 ```
 

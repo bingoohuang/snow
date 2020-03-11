@@ -29,19 +29,19 @@ func TestNewNodeLocalIP(t *testing.T) {
 	node, err := NewNode(WithNodeIDLocalIP(0, "192.168.0.10"))
 
 	that.Nil(err)
-	that.Equal(int64(10), node.NodeID())
+	that.Equal(int64(10), node.GetNodeID())
 	that.Equal(int64(10), node.NodeIDOf(node.Next()))
 
 	node, err = NewNode(WithNodeIDLocalIP(1, "192.168.0.10"))
 
 	that.Nil(err)
-	that.Equal(int64(1<<8|10), node.NodeID())
+	that.Equal(int64(1<<8|10), node.GetNodeID())
 	that.Equal(int64(1<<8|10), node.NodeIDOf(node.Next()))
 
 	node, err = NewNode(WithEpoch(12345678))
 
 	that.Nil(err)
-	that.True(node.TimeOf(node.Next()) > node.Epoch())
+	that.True(node.TimeOf(node.Next()) > node.GetEpoch())
 }
 
 //******************************************************************************

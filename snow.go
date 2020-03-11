@@ -26,20 +26,20 @@ type Node struct {
 	nodeMask int64
 }
 
-// Option return the option.
-func (n *Node) Option() Option { return n.option }
+// GetOption return the option.
+func (n *Node) GetOption() Option { return n.option }
 
-// Epoch returns an int64 epoch is snowflake epoch in milliseconds.
-func (n *Node) Epoch() int64 { return n.epoch }
+// GetEpoch returns an int64 epoch is snowflake epoch in milliseconds.
+func (n *Node) GetEpoch() int64 { return n.epoch }
 
-// Time returns an int64 unix timestamp in milliseconds of the snowflake ID time.
-func (n *Node) Time() int64 { return n.time }
+// GetTime returns an int64 unix timestamp in milliseconds of the snowflake ID time.
+func (n *Node) GetTime() int64 { return n.time }
 
-// NodeID returns an int64 of the snowflake ID node number
-func (n *Node) NodeID() int64 { return n.nodeID }
+// GetNodeID returns an int64 of the snowflake ID node number
+func (n *Node) GetNodeID() int64 { return n.nodeID }
 
-// Step returns an int64 of the snowflake step (or sequence) number
-func (n *Node) Step() int64 { return n.step }
+// GetStep returns an int64 of the snowflake step (or sequence) number
+func (n *Node) GetStep() int64 { return n.step }
 
 // nolint gomnd
 func (n *Node) applyOption(o Option) error {
