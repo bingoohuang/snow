@@ -4,11 +4,14 @@ package snow
 import (
 	"errors"
 	"strconv"
+	"sync"
 	"time"
 )
 
 // A Node struct holds the basic information needed for a snowflake generator node
 type Node struct {
+	mu sync.Mutex
+
 	option    Option
 	nodeID    int64
 	stepMask  int64
@@ -77,8 +80,6 @@ func NewNode(optionFns ...OptionFn) (*Node, error) {
 		return nil, err
 	}
 
-	go n.generating()
-
 	return n, nil
 }
 
@@ -87,17 +88,10 @@ func NewNode(optionFns ...OptionFn) (*Node, error) {
 // - Make sure your system is keeping accurate system time
 // - Make sure you never have multiple nodes running with the same node ID
 func (n *Node) Next() ID {
-	return <-n.option.OutC
-}
+	n.mu.Lock()
+	defer n.mu.Unlock()
 
-func (n *Node) generating() {
-	for {
-		select {
-		case n.option.OutC <- n.next():
-		case <-n.option.StopC:
-			return
-		}
-	}
+	return n.next()
 }
 
 func (n *Node) next() ID {
@@ -114,5 +108,5 @@ func (n *Node) next() ID {
 
 	n.time = now
 
-	return ID((now)<<n.timeShift | (n.nodeID << n.nodeShift) | (n.step))
+	return ID(now<<n.timeShift | n.nodeID<<n.nodeShift | n.step)
 }

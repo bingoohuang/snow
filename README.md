@@ -15,7 +15,6 @@ snowflake is a [Go](https://golang.org/) package that provides
 * JSON Marshal/Unmarshal functions to easily use snowflake IDs within a JSON API.
 * Monotonic Clock calculations protect from clock drift.
 * Default nodeID is set to main last part of IPv4 (on en0/eth0 interface), eg. nodeID = 3 when IP is 192.168.1.3
-* Channel output API for more golang style.
 
 **For help with this package or general Go discussion, please join the [Discord Gophers](https://discord.gg/0f1SbxBZjYq9jLBk) chat server.**
 
@@ -98,7 +97,7 @@ cannot guarantee unique IDs across all nodes.
 #### Use default Snowflake Node
 
 ```go
-// Next return a new generated snowflake ID by the Global DefaultSnow
+// Next return a new generated snowflake ID by the Global snow.DefaultNode
 // with the 10-bits node ID which get the last 8-bits from host IP v4.
 id := snow.Next()
 
@@ -126,18 +125,6 @@ fmt.Printf("String ID: %s\n", id)
 fmt.Printf("Base2  ID: %s\n", id.Base2())
 fmt.Printf("Base64 ID: %s\n", id.Base64())
 fmt.Printf("ID       : %d\n", node.Next().Int64())
-```
-
-#### Use output channel mode
-
-```go
-out := make(chan snow.ID)
-snow.NewNode(snow.WithOutChan(out))
-
-// get a new generated snowflake ID.
-id = <- out
-// Print out the ID in a few different ways.
-fmt.Printf("Int64  ID: %d\n", id)
 ```
 
 ### Performance

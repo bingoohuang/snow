@@ -9,20 +9,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewNodeOutput(t *testing.T) {
-	that := assert.New(t)
-
-	out := make(chan ID)
-	node, err := NewNode(WithNodeID(1), WithOutChan(out))
-	that.Nil(err)
-
-	id := <-out
-	that.Equal(int64(1), node.NodeIDOf(id))
-
-	id = <-out
-	that.Equal(int64(1), node.NodeIDOf(id))
-}
-
 func TestNewNodeLocalIP(t *testing.T) {
 	that := assert.New(t)
 

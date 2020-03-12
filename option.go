@@ -16,12 +16,6 @@ type Option struct {
 
 	// NodeID for the snowflake.
 	NodeID int64
-
-	// OutC for output channel for receiving the generated ID.
-	OutC chan ID
-
-	// StopC for stop channel for stop receiving goroutine.
-	StopC chan bool
 }
 
 // Apply applies the option functions to the option.
@@ -45,10 +39,6 @@ func (o *Option) Apply(fns ...OptionFn) {
 
 	if o.NodeID < 0 {
 		o.NodeID = defaultIPNodeID()
-	}
-
-	if o.OutC == nil {
-		o.OutC = make(chan ID, 1000)
 	}
 }
 
@@ -75,19 +65,3 @@ func WithNodeBits(n uint8) OptionFn { return func(o *Option) { o.NodeBits = n } 
 
 // WithStepBits set the customized StepBits n.
 func WithStepBits(n uint8) OptionFn { return func(o *Option) { o.StepBits = n } }
-
-// WithOutChan set the customized output channel.
-func WithOutChan(outC chan ID) OptionFn {
-	return func(o *Option) {
-		o.OutC = outC
-		o.StopC = make(chan bool)
-	}
-}
-
-// WithOutChanStop set the customized output channel.
-func WithOutChanStop(outC chan ID, stopC chan bool) OptionFn {
-	return func(o *Option) {
-		o.OutC = outC
-		o.StopC = stopC
-	}
-}

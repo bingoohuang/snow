@@ -13,10 +13,10 @@ func (n *Node) NodeIDOf(f ID) int64 { return int64(f) & n.nodeMask >> n.nodeShif
 func (n *Node) StepOf(f ID) int64 { return int64(f) & n.stepMask }
 
 // Time returns an int64 unix timestamp in milliseconds of the snowflake ID time
-func (f ID) Time() int64 { return DefaultSnow.TimeOf(f) }
+func (f ID) Time() int64 { return DefaultNode.TimeOf(f) }
 
 // NodeID returns an int64 of the snowflake ID node number
-func (f ID) NodeID() int64 { return DefaultSnow.NodeIDOf(f) }
+func (f ID) NodeID() int64 { return DefaultNode.NodeIDOf(f) }
 
 // Step returns an int64 of the snowflake step (or sequence) number
-func (f ID) Step() int64 { return DefaultSnow.StepOf(f) }
+func (f ID) Step() int64 { return DefaultNode.StepOf(f) }
