@@ -2,11 +2,14 @@ package snow
 
 import (
 	"encoding/binary"
+
+	bip "github.com/bingoohuang/ip"
+
 	"net"
 )
 
 func defaultIPNodeID() int64 {
-	ip := InferHostIPv4("")
+	ip, _ := bip.MainIP()
 	return ipNodeID(ip)
 }
 

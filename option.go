@@ -1,5 +1,9 @@
 package snow
 
+import (
+	bip "github.com/bingoohuang/ip"
+)
+
 // Option for the snowflake
 type Option struct {
 	// Epoch is set to the twitter snowflake epoch of Nov 04 2010 01:42:54 UTC in milliseconds
@@ -51,7 +55,7 @@ func WithNodeID(nodeID int64) OptionFn { return func(o *Option) { o.NodeID = nod
 // WithNodeIDLocalIP set the customized nodeID  with the last 8 bits of local IP v4 and first 2 bits of p.
 func WithNodeIDLocalIP(p int64, ip string) OptionFn {
 	if ip == "" {
-		ip = InferHostIPv4("")
+		ip, _ = bip.MainIP()
 	}
 
 	return func(o *Option) { o.NodeID = (p << 8) | ipNodeID(ip) }
